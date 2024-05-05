@@ -21,21 +21,21 @@
         <div class="target-container">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 150" width="200" height="300">
             <!-- Head -->
-            <circle id="Head" cx="50" cy="30" r="15" fill="lightgray" />
+            <circle id="Head" ref="Head" cx="50" cy="30" r="15" fill="lightgray" />
             <!-- Left-shoulder -->
-            <rect id="Arm-1" x="8" y="46" width="20" height="20" fill="lightgray" />
+            <rect id="Arm-1" ref="Arm-1" x="8" y="46" width="20" height="20" fill="lightgray" />
             <!-- Left-arm -->
-            <rect id="Arm-2" x="8" y="68" width="20" height="20" fill="lightgray" />
+            <rect id="Arm-2" ref="Arm-2" x="8" y="68" width="20" height="20" fill="lightgray" />
             <!-- Right-shoulder -->
-            <rect id="Arm-3" x="72" y="46" width="20" height="20" fill="lightgray" />
+            <rect id="Arm-3" ref="Arm-3" x="72" y="46" width="20" height="20" fill="lightgray" />
             <!-- Right-arm -->
-            <rect id="Arm-4" x="72" y="68" width="20" height="20" fill="lightgray" />
+            <rect id="Arm-4" ref="Arm-4" x="72" y="68" width="20" height="20" fill="lightgray" />
             <!-- Torso -->
-            <rect id="Torso" x="30" y="50" width="40" height="50" fill="lightgray" />
+            <rect id="Torso" ref="Torso" x="30" y="50" width="40" height="50" fill="lightgray" />
             <!-- Left-leg -->
-            <rect id="Leg-1" x="30" y="102" width="15" height="30" fill="lightgray" />
+            <rect id="Leg-1" ref="Leg-1" x="30" y="102" width="15" height="30" fill="lightgray" />
             <!-- Right-leg -->
-            <rect id="Leg-2" x="55" y="102" width="15" height="30" fill="lightgray" />
+            <rect id="Leg-2" ref="Leg-2" x="55" y="102" width="15" height="30" fill="lightgray" />
           </svg>
         </div>
       </div>
@@ -47,6 +47,7 @@
 const apiUrl = 'http://backend.braindump.test/api'
 
 export default {
+  name: 'TT2RaidTarget',
   data() {
     return {
       // inputs: Array(9).fill('').map(() => (Math.random() * 100).toFixed(2)),
@@ -57,9 +58,20 @@ export default {
   },
   methods: {
     resetSvgColor() {
-      const svgElements = document.querySelectorAll('.target-container svg [fill]');
-      svgElements.forEach(element => {
-        element.setAttribute('fill', 'lightgray'); // 或其他你希望的初始顏色
+      const parts = [
+        "Head",
+        "Arm-1",
+        "Arm-2",
+        "Arm-3",
+        "Arm-4",
+        "Torso",
+        "Leg-1",
+        "Leg-2"
+      ]
+
+      parts.forEach(part => {
+        let element = this.$refs[part]
+        element.setAttribute('fill', 'lightgray');
       });
     },
     drawTargetOnSvg() {
@@ -67,7 +79,10 @@ export default {
       let totalAp = 0.0
       // draw by result
       for (let part of Object.values(this.result)) {
-        document.getElementById(`${part.name}`).setAttribute('fill', 'green');
+        let element = this.$refs[part.name]
+
+        element.setAttribute('fill', 'green');
+
         totalHp += parseFloat(part.hp)
         totalAp += parseFloat(part.ap)
       }
