@@ -4,15 +4,31 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node node_modules/vitest/vitest.mjs"
   },
   "dependencies": {
     "vue": "^3.4.21"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
-    "vite": "^5.2.0"
+    "@vue/test-utils": "^2.4.5",
+    "happy-dom": "^14.7.1",
+    "vite": "^5.2.0",
+    "vitest": "^1.5.2"
+  },
+  "jest": {
+    "verbose": true,
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.vue$": "@vue/vue3-jest"
+    },
+    "testEnvironment": "jsdom"
   }
 }
