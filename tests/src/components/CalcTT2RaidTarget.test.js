@@ -68,6 +68,7 @@ describe('Unit', () => {
     expect(component.vm.result).toStrictEqual(returnData)
   })
 })
+
 describe('Feature', () => {
   test('input and check svg changed', async () => {
     const component = mount(TT2RaidTarget)
