@@ -9,8 +9,9 @@
         <div>
           TT2
           <ul>
-            <li><router-link to="/tt2/titan">TT2Titan</router-link></li>
-            <li><router-link to="/tt2/upload">TT2Upload</router-link></li>
+            <li><router-link to="/tt2/titan">Titan Target Calculator</router-link></li>
+            <li><router-link to="/tt2/upload">Upload Raid Reports</router-link></li>
+            <li><router-link to="/tt2/attendance">Raid Attendance</router-link></li>
           </ul>
         </div>
       </nav>
